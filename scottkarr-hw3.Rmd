@@ -1,0 +1,40 @@
+---
+title: "Tuberculosis Lab"
+author: "Scott Karr"
+date: "February 14, 2016"
+output:
+  html_document:
+    css: ./lab.css
+    highlight: pygments
+    theme: cerulean
+  pdf_document: default
+---
+
+Assumes the tuberculosis database has been installed.
+loads the PostgreSQL driver
+```{r}
+library(RPostgreSQL)
+dbname <- "tb"
+dbuser <- "postgres"
+dbpass <- "postgres"
+dbhost <- "localhost"
+dbport <- 5432
+drv <- dbDriver("PostgreSQL")
+con <- dbConnect(drv, host=dbhost, port=dbport, dbname=dbname,user=dbuser, password=dbpass)
+query <- dbSendQuery(con, query <- "
+  select 	 country, round(avg(population)), round(avg(rate_per_100thsd)) avgRate_per_100thsd
+  from 	 tb_rates
+  group by country
+  order by round(avg(rate_per_100thsd)) desc 
+  limit 25
+")
+fetch(query,n=-1)
+dbDisconnect(con)
+dbUnloadDriver(drv)
+```
+
+tb_stats_ger2002 <- dbGetQuery(con, query)
+view(tb_stats_ger2002)
+
+dbDisconnect(con)
+dbUnloadDriver(drv)
