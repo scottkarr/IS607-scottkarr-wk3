@@ -1,0 +1,26 @@
+"country","round","avgrate_per_100thsd","trend","regr_slope"
+"South Africa",48776209,199,"higher",26.0041071428607
+"Swaziland",1119173,166,"higher",14.353096330273
+"Lesotho",1921021,131,"higher",12.1931642351884
+"Botswana",1873174,118,"higher",6.93411764705568
+"Namibia",1996352,118,"higher",5.142017543858
+"Zimbabwe",13013731,115,"higher",8.72500000000087
+"Djibouti",772518,94,"lower",-2.96945304437411
+"Zambia",11886712,82,"higher",4.603817550821
+"Democratic People's Republic of Korea",23697016,77,"higher",12.4035539215682
+"Kenya",35223304,63,"higher",4.30780701754358
+"Cambodia",13150460,63,"lower",-0.21399399721395
+"Haiti",9138149,52,"higher",3.50238821138032
+"Angola",16275446,48,"higher",2.09324561403523
+"Democratic Republic of the Congo",53347893,46,"higher",2.37447368421025
+"Congo",3734873,46,"higher",0.0502217294894715
+"Liberia",3379806,45,"higher",4.31058792923999
+"Sierra Leone",4908981,45,"higher",2.88853981316643
+"Central African Republic",3928462,44,"higher",1.86029885057488
+"Kazakhstan",15313401,42,"higher",2.4731888544887
+"Mongolia",2526107,40,"higher",2.94903508771834
+"United Republic of Tanzania",37895089,39,"higher",0.948761609907377
+"Madagascar",18137884,38,"higher",1.12416610512142
+"Bolivia (Plurinational State of)",9249710,37,"lower",-0.295098039216199
+"Uganda",28279046,36,"lower",-0.152280701754317
+"Philippines",85514697,35,"higher",3.2429546659599

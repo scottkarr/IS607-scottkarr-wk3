@@ -1,26 +1,16 @@
-﻿/* if null data exists in any count, force 0 and filter in RStudio */
-DROP TABLE IF EXISTS tb_rates;
-
-CREATE TABLE tb_rates AS
-	SELECT 	tb.country, 
-		tb.year, 
-		coalesce(tb.child+tb.adult+tb.elderly,null,0) AS cases, 
-		pop.population,
-		round(cast(coalesce(tb.child+tb.adult+tb.elderly,null,0) AS numeric)/cast(pop.population AS numeric), 6) * 100000 AS rate_per_100thsd
-	FROM 	tb, population pop
-	WHERE 	1=1
-	AND	tb.country = pop.country
-	AND	tb.year = pop.year
-;
-
-COPY (
-	SELECT 	tb.country, 
-		tb.year, 
-		coalesce(tb.child+tb.adult+tb.elderly,null,0) AS cases, 
-		pop.population,
-		round(cast(coalesce(tb.child+tb.adult+tb.elderly,null,0) AS numeric)/cast(pop.population AS numeric), 6) * 100000 AS rate_per_100thsd
-	FROM 	tb, population pop
-	WHERE 	1=1
-	AND	tb.country = pop.country
-	AND	tb.year = pop.year
-) TO '/tmp/tbrates.csv' With CSV Header;
+﻿select 	 
+country, 
+round(avg(population)), 
+round(avg(rate_per_100thsd)) avgRate_per_100thsd,
+CASE 
+WHEN regr_slope(rate_per_100thsd, year) > 0 THEN 'higher'
+WHEN regr_slope(rate_per_100thsd, year) < 0 THEN 'lower'	 
+ELSE 'na'
+END trend,
+regr_slope(rate_per_100thsd, year) regr_slope
+from 	 tb_rates
+where 1=1
+and   rate_per_100thsd <> 0
+group by country
+order by round(avg(rate_per_100thsd)) desc 
+limit 25    
